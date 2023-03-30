@@ -74,14 +74,39 @@
     <script>
       let account;
       const connectMetamask = async () => {
+        //let accountList = JSON.parse("{{ account_list_json|safe }}");
+        //console.log(accountList);
+        // let accountList = [
+        //   {
+        //     id: 1,
+        //     fname: "Paramvir",
+        //     lname: "Singh",
+        //     email: "paramvir@singh.com",
+        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
+        //   },
+        //   {
+        //     id: 2,
+        //     fname: "Paramvir",
+        //     lname: "Singh",
+        //     email: "paramvir@singh.com",
+        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
+        //   },
+        //];
+        //console.log(accountList[0]);
+        // for (let x in accountList) {
+        //   console.log("x is ", x, accountList[x]);
+        // }
         if (window.ethereum !== "undefined") {
           const accounts = await ethereum.request({
             method: "eth_requestAccounts",
           });
           account = accounts[0];
+          console.log("account value is: ", account);
+          // if ("0xec95cad38df7b49b3432d83f0b80997e82a47a68" === account) {
           document.getElementById(
             "accountArea"
           ).innerHTML = `Account is: ${account}`;
+          // }
         }
       };
 
