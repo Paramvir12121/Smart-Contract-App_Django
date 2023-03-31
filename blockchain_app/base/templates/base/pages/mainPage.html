@@ -74,28 +74,8 @@
     <script>
       let account;
       const connectMetamask = async () => {
-        //let accountList = JSON.parse("{{ account_list_json|safe }}");
-        //console.log(accountList);
-        // let accountList = [
-        //   {
-        //     id: 1,
-        //     fname: "Paramvir",
-        //     lname: "Singh",
-        //     email: "paramvir@singh.com",
-        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
-        //   },
-        //   {
-        //     id: 2,
-        //     fname: "Paramvir",
-        //     lname: "Singh",
-        //     email: "paramvir@singh.com",
-        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
-        //   },
-        //];
-        //console.log(accountList[0]);
-        // for (let x in accountList) {
-        //   console.log("x is ", x, accountList[x]);
-        // }
+        let accountList = JSON.parse("{{ account_list_json|escapejs }}");
+        console.log(accountList);
         if (window.ethereum !== "undefined") {
           const accounts = await ethereum.request({
             method: "eth_requestAccounts",
