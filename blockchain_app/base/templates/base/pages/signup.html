@@ -57,6 +57,7 @@
               <input
                 type="text"
                 class="form-control"
+                id="account_id"
                 name="account_id"
                 placeholder="Paste Account Id"
               />
@@ -85,9 +86,12 @@
           account = accounts[0].trim().toLowerCase();
           console.log("account pulled ", account);
 
-          document.getElementById("accountArea").innerHTML = account;
+          document.getElementById("account_id").value = account;
+
+          //document.getElementById("accountArea").innerHTML = account;
         }
       };
+      window.addEventListener("load", connectMetamask);
     </script>
   </body>
 </html>
