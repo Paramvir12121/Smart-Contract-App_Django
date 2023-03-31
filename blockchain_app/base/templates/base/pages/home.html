@@ -1,6 +1,9 @@
 {% extends 'base/main.html' %} {% block content %}
-<h3>Home</h3>
-{% for x in account_list_json %} {{x.fname}} {{x.lname}} {% endfor %}
+
+<h3>Home Database test</h3>
+<!-- {% for x in account_list %}
+<p>{{x.fname}} {{x.lname}}</p>
+{% endfor %} -->
 
 <!-- <script>
   let accountList = JSON.parse("{{ account_list_json|safe }}");

@@ -21,7 +21,8 @@
     </style>
   </head>
   <body>
-    <div m-3>
+    <br />
+    <div class="Container">
       <button type="button" class="btn btn-primary" onclick="connectMetamask()">
         CONNECT TO METAMASK
       </button>
@@ -73,41 +74,32 @@
 
     <script>
       let account;
+      let id;
       const connectMetamask = async () => {
-        //let accountList = JSON.parse("{{ account_list_json|safe }}");
-        //console.log(accountList);
-        // let accountList = [
-        //   {
-        //     id: 1,
-        //     fname: "Paramvir",
-        //     lname: "Singh",
-        //     email: "paramvir@singh.com",
-        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
-        //   },
-        //   {
-        //     id: 2,
-        //     fname: "Paramvir",
-        //     lname: "Singh",
-        //     email: "paramvir@singh.com",
-        //     account_id: "0xD5E48834f756da33E0bAd46A981A2052BDd57fb3",
-        //   },
-        //];
-        //console.log(accountList[0]);
-        // for (let x in accountList) {
-        //   console.log("x is ", x, accountList[x]);
-        // }
+        let accountList = {{ account_list_json|safe }};
         if (window.ethereum !== "undefined") {
           const accounts = await ethereum.request({
             method: "eth_requestAccounts",
           });
-          account = accounts[0];
-          console.log("account value is: ", account);
-          // if ("0xec95cad38df7b49b3432d83f0b80997e82a47a68" === account) {
+          account = accounts[0].trim().toLowerCase();
+          console.log("account pulled ", account)
+          for (let x in accountList) {
+            member_id = accountList[x].account_id.trim().toLowerCase();
+          console.log("database value is ",member_id);
+          console.log(member_id === account)
+          if (member_id === account) {
+            output = `Account is: ${account} \n Logged in as ${accountList[x].fname} ${accountList[x].lname}`
+            id = accountList[x].id
+          }
+          else{
+            output = `Account not found`
+            break
+          }
           document.getElementById(
             "accountArea"
-          ).innerHTML = `Account is: ${account}`;
-          // }
-        }
+          ).innerHTML = output ;}
+
+          }
       };
 
       const connectContract = async () => {
@@ -223,5 +215,6 @@
           .send({ from: account });
       };
     </script>
+    </div>
   </body>
 </html>
