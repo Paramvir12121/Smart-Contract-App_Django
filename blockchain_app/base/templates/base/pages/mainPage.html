@@ -99,11 +99,22 @@
     <div m-3>
       <input type="text" id="inputArea" m-3 />
     </div>
+    <form id='transaction_form' method="POST" action="{% url 'mainPage' %}">
+            {% csrf_token %}
+          <input
+                type="hidden"
+                id="transaction_id"
+                name="transaction_id"
+              />
+              <input type="submit" value="Submit">
+            </div>
+    </form>
 
     <script>
       let account;
       let id;
       let output
+      let user;
       let accountFoundFlag = false
       const connectMetamask = async () => {
         let accountList = {{ account_list_json|safe }};
@@ -245,6 +256,11 @@
           .changeAmount(myEntry)
           .send({ from: account });
       };
+      data = "this is data"
+      var form = document.getElementById('transaction_form');
+      var data = document.getElementById('transaction_id');
+      form.submit
+            
     </script>
     </div>
   </body>
