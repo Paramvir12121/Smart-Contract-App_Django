@@ -72,7 +72,7 @@
         <div class="col">
           <p id="farmerNameArea"></p>
         </div>
-        <div class="col">
+        <!-- <div class="col">
           <p id="farmerIdArea"></p>
         </div>
       </div>
@@ -88,8 +88,8 @@
         <p id="amountArea"></p>
       </div>
     </div>
-    <p id="dataArea" m-3>Data Status: NO Data from Smart Contract</p>
-
+    <p id="dataArea" m-3>Data Status: NO Data from Smart Contract</p> -->
+<!-- 
     <div m-3>
       <button type="button" class="btn btn-primary" onclick="changeWord()">
         BORROW
@@ -97,7 +97,8 @@
     </div>
     <br />
     <div m-3>
-      <input type="text" id="inputArea" m-3 />
+      <input type="text" id="inputArea" m-3 /> -->
+    </div> 
     </div>
 
     <script>
@@ -134,117 +135,52 @@
       };
 
       const connectContract = async () => {
-        const ABI = [
-          {
-            inputs: [
-              {
-                internalType: "string",
-                name: "_word",
-                type: "string",
-              },
-            ],
-            name: "changeAmount",
-            outputs: [],
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-          {
-            inputs: [],
-            name: "farmerId",
-            outputs: [
-              {
-                internalType: "string",
-                name: "",
-                type: "string",
-              },
-            ],
-            stateMutability: "view",
-            type: "function",
-          },
-          {
-            inputs: [],
-            name: "farmerName",
-            outputs: [
-              {
-                internalType: "string",
-                name: "",
-                type: "string",
-              },
-            ],
-            stateMutability: "view",
-            type: "function",
-          },
-          {
-            inputs: [],
-            name: "getAmount",
-            outputs: [
-              {
-                internalType: "string",
-                name: "",
-                type: "string",
-              },
-            ],
-            stateMutability: "view",
-            type: "function",
-          },
-          {
-            inputs: [],
-            name: "lenderId",
-            outputs: [
-              {
-                internalType: "string",
-                name: "",
-                type: "string",
-              },
-            ],
-            stateMutability: "view",
-            type: "function",
-          },
-          {
-            inputs: [],
-            name: "lenderName",
-            outputs: [
-              {
-                internalType: "string",
-                name: "",
-                type: "string",
-              },
-            ],
-            stateMutability: "view",
-            type: "function",
-          },
-        ];
-        const Address = "0x92AdEf588F76f7d484D2ff1fc35C6DeD23Ff5ebC";
+        const ABI =[
+        {
+          "inputs": [],
+          "name": "myCity",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+        const Address = "0x6C1D6Be7F704Df7dd26471CB3b9C55b92230eE27";   //address of contract on blockchain 0x6C1D6Be7F704Df7dd26471CB3b9C55b92230eE27
         window.web3 = await new Web3(window.ethereum);
         window.contract = await new window.web3.eth.Contract(ABI, Address);
         document.getElementById("contractArea").innerHTML =
           "Connection Status: Success";
       };
-
+      //read data from contract
       const readWord = async () => {
-        const data = await window.contract.methods.getAmount().call();
-        document.getElementById("dataArea").innerHTML = `Amount is: ${data}`;
-        const farmerName = await window.contract.methods.farmerName().call();
-        const farmerId = await window.contract.methods.farmerId().call();
-        const lenderName = await window.contract.methods.lenderName().call();
-        const lenderId = await window.contract.methods.lenderId().call();
-          
-        document.getElementById(
-          "farmerNameArea"
-        ).innerHTML = `Borrower Name: ${farmerName}`;
-        document.getElementById("farmerIdArea").innerHTML = farmerId;
-        document.getElementById(
-          "lenderNameArea"
-        ).innerHTML = `Lender Name: ${lenderName}`;
-        document.getElementById("lenderIdArea").innerHTML = lenderId;
+        const data = await window.contract.methods.myCity().call();
+        document.getElementById("farmerNameArea").innerHTML = `City is: ${data}`;
+        // const farmerName = await window.contract.methods.farmerName().call();
+        // const farmerId = await window.contract.methods.farmerId().call();
+        // const lenderName = await window.contract.methods.lenderName().call();
+        // const lenderId = await window.contract.methods.lenderId().call();
+
+        // document.getElementById(
+        //   "farmerNameArea"
+        // ).innerHTML = `Borrower Name: ${farmerName}`;
+        // document.getElementById("farmerIdArea").innerHTML = farmerId;
+        // document.getElementById(
+        //   "lenderNameArea"
+        // ).innerHTML = `Lender Name: ${lenderName}`;
+        // document.getElementById("lenderIdArea").innerHTML = lenderId;
       };
 
-      const changeWord = async () => {
-        const myEntry = document.getElementById("inputArea").value;
-        await window.contract.methods
-          .changeAmount(myEntry)
-          .send({ from: account });
-      };
+      // const changeWord = async () => {
+      //   const myEntry = document.getElementById("inputArea").value;
+      //   await window.contract.methods
+      //     .changeAmount(myEntry)
+      //     .send({ from: account });
+      // };
     </script>
     </div>
   </body>
